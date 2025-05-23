@@ -3,58 +3,44 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Enfant {
-	
-	private int idEnfant;
-	private String nomEnfant;
-	private String prenomEnfant;
-	private LocalDate dateNaissance;
-	private int idParent;
-	private List<JourGarde> joursGarde = new ArrayList<>();
-	
-	public int getIdEnfant() {
-		return idEnfant;
-	}
-	public void setIdEnfant(int idEnfant) {
-		this.idEnfant = idEnfant;
-	}
-	public String getNomEnfant() {
-		return nomEnfant;
-	}
-	public void setNomEnfant(String nomEnfant) {
-		this.nomEnfant = nomEnfant;
-	}
-	public String getPrenomEnfant() {
-		return prenomEnfant;
-	}
-	public void setPrenomEnfant(String prenomEnfant) {
-		this.prenomEnfant = prenomEnfant;
-	}
-	public LocalDate getDateNaissance() {
-		return dateNaissance;
-	}
-	public void setDateNaissance(LocalDate dateNaissance) {
-		this.dateNaissance = dateNaissance;
-	}
-	public Enfant(int idEnfant, String nomEnfant, String prenomEnfant, LocalDate dateNaissance, int idParent) {
-		this.idEnfant = idEnfant;
-		this.nomEnfant = nomEnfant;
-		this.prenomEnfant = prenomEnfant;
-		this.dateNaissance = dateNaissance;
-		this.idParent = idParent;
-	}
-	
-	@Override
-	public String toString() {
-		return "Affichage de l'enfant " + idEnfant + 
-				"\n Id : " +idEnfant + 
-				"\n Nom : " + nomEnfant + 
-				"\n PrenomEnfant : " + prenomEnfant +
-				"\n Date de naissance : " + dateNaissance + 
-				"\n Identifiant de son parent : " + idParent;
-	}
-	
-	
-	
+    private int idEnfant;
+    private String nomEnfant;
+    private String prenomEnfant;
+    private String dateNaissance;
+
+    public Enfant(int idEnfant, String nomEnfant, String prenomEnfant, String dateNaissance) {
+        this.idEnfant = idEnfant;
+        this.nomEnfant = nomEnfant;
+        this.prenomEnfant = prenomEnfant;
+        this.dateNaissance = dateNaissance;
+    }
+
+    public int getIdEnfant() {
+        return idEnfant;
+    }
+
+    public String getNomComplet() {
+        return prenomEnfant + " " + nomEnfant;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Enfant)) return false;
+        Enfant enfant = (Enfant) o;
+        return idEnfant == enfant.idEnfant;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idEnfant);
+    }
+
+    @Override
+    public String toString() {
+        return "[" + idEnfant + "] " + getNomComplet() + " - Né le " + dateNaissance;
+    }
 }
